@@ -17,20 +17,34 @@ config = context.config
 if config.config_file_name is not None:
     fileConfig(config.config_file_name)
 
-# Load database URL from Docker environment variables.
-# Escape percent signs for ConfigParser.
+
+database_url = settings.DATABASE_URL
+
+if database_url.startswith("postgres://"):
+    database_url = database_url.replace(
+        "postgres://", "postgresql+asyncpg://", 1
+    )
+elif database_url.startswith("postgresql://"):
+    database_url = database_url.replace(
+        "postgresql://", "postgresql+asyncpg://", 1
+    )
+elif database_url.startswith("postgresql+psycopg://"):
+    database_url = database_url.replace(
+        "postgresql+psycopg://", "postgresql+asyncpg://", 1
+    )
+
+
 config.set_main_option(
     "sqlalchemy.url",
-    settings.DATABASE_URL.replace("%", "%%"),
+    database_url.replace("%", "%%"),
 )
 
-# Load SQLAlchemy model metadata.
 target_metadata = Base.metadata
 
 
 def run_migrations_offline():
     context.configure(
-        url=settings.DATABASE_URL,
+        url=database_url,
         target_metadata=target_metadata,
         literal_binds=True,
         dialect_opts={"paramstyle": "named"},
