@@ -1,0 +1,44 @@
+
+services:
+  db:
+    image: postgres:17
+    container_name: pagepeek_db
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: pagepeek
+      POSTGRES_USER: pagepeek_user
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U pagepeek_user -d pagepeek"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "5433:5432"
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: pagepeek_backend
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      APP_NAME: Pagepeek
+      ENVIRONMENT: development
+      DATABASE_URL: postgresql+asyncpg://pagepeek_user:${POSTGRES_PASSWORD}@db:5432/pagepeek
+      SECRET_KEY: ${SECRET_KEY}
+      ACCESS_TOKEN_EXPIRE_MINUTES: 60
+      FRONTEND_ORIGIN: http://localhost:5173
+      SCREENSHOT_DIR: /app/storage/screenshots
+    volumes:
+      - ./backend:/app
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  postgres_data:

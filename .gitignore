@@ -1,0 +1,23 @@
+# Environment variables
+.env
+backend/.env
+**/.env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# React
+node_modules/
+dist/
+
+# Generated screenshots
+backend/storage/screenshots/*
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store

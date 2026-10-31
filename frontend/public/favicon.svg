@@ -1,0 +1,17 @@
+<svg width="48" height="48" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="pp-favicon-grad" x1="0" y1="0" x2="36" y2="36" gradientUnits="userSpaceOnUse">
+      <stop stopColor="#2563EB" />
+      <stop offset="1" stopColor="#1D4ED8" />
+    </linearGradient>
+  </defs>
+  <rect width="36" height="36" rx="9" fill="url(#pp-favicon-grad)" />
+  <rect x="6.5" y="7.5" width="23" height="21" rx="3.5" fill="white" fill-opacity="0.16" stroke="white" stroke-width="1.5" />
+  <line x1="6.5" y1="13.5" x2="29.5" y2="13.5" stroke="white" stroke-width="1" stroke-opacity="0.5" />
+  <circle cx="10" cy="10.5" r="1.1" fill="white" fill-opacity="0.95" />
+  <circle cx="13" cy="10.5" r="1.1" fill="white" fill-opacity="0.6" />
+  <circle cx="16" cy="10.5" r="1.1" fill="white" fill-opacity="0.6" />
+  <circle cx="18" cy="20.5" r="3.8" stroke="white" stroke-width="1.4" />
+  <circle cx="18" cy="20.5" r="1.4" fill="white" />
+  <path d="M10.5 17.5v-1.5h1.5M25.5 17.5v-1.5h-1.5M10.5 23.5v1.5h1.5M25.5 23.5v1.5h-1.5" stroke="white" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" stroke-opacity="0.8" />
+</svg>
